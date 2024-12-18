@@ -20,11 +20,11 @@ import { getTodos } from './api';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoaiding] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [selectOption, setSelectOption] = useState('all');
   const [query, setQuery] = useState('');
-  const [clearSearch, setClearSearch] = useState(false);
+  // const [clearSearch, setClearSearch] = useState(false);
   const [visibleButton, setVisibleButton] = useState(false);
 
   useEffect(() => {
@@ -40,28 +40,30 @@ export const App: React.FC = () => {
 
         if (query !== '') {
           setVisibleButton(true);
-          setClearSearch(false);
+          // setClearSearch(false);
           filteredTodos = filteredTodos.filter((todo: Todo) =>
             todo.title.toLowerCase().includes(query.toLowerCase()),
           );
         }
 
-        if (clearSearch) {
-          setQuery('');
-          setVisibleButton(false);
-        }
+        // if (clearSearch) {
+        //   setQuery('');
+        //   setVisibleButton(false);
+        // }
 
         setTodos(filteredTodos);
       })
-      .finally(() => setLoaiding(false));
-  }, [selectOption, query, clearSearch]);
+      .finally(() => setLoading(false));
+  }, [selectOption, query]);
 
   const resetSelectedTodo = () => {
     setSelectedTodo(null);
   };
 
   const handleClearSearchButton = () => {
-    setClearSearch(true);
+    // setClearSearch(true);
+    setQuery('');
+    setVisibleButton(false);
   };
 
   return (
